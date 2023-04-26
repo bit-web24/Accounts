@@ -1,0 +1,1 @@
+[Dict("email" => user.email, "password" => user.password) for user in users]

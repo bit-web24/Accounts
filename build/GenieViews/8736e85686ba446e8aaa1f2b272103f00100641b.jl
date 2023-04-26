@@ -13,7 +13,7 @@ function func_8736e85686ba446e8aaa1f2b272103f00100641b(;
                         Genie.Renderer.Html.meta(charset = "utf-8", htmlsourceindent = "2")
                         Genie.Renderer.Html.title(htmlsourceindent = "2") do
                             [
-                                """Genie :: The Highly Productive Julia Web Framework""";
+                                """Accounts""";
                             ]
                         end
                     ]

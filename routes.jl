@@ -9,3 +9,7 @@ route("/auth", UsersController.auth, named=:auth)
 
 route("/auth/login", UsersController.login, named= :log_in)
 route("/auth/signup", UsersController.signup, named= :sign_up)
+
+route("/authenticator", UsersController.authenticator, method=POST ,named= :authenticator)
+route("/dashboard", UsersController.dashboard, named= :dashboard)
+route("/api/users", UsersController.API.users, named= :api_users)

@@ -6,15 +6,14 @@ function up()
   create_table(:users) do
     [
       pk()
-      column(:column_name, :column_type)
       columns([
-        :column_name => :column_type
+        :email => :string
+        :password => :string
       ])
     ]
   end
 
-  add_index(:users, :column_name)
-  add_indices(:users, :column_name_1, :column_name_2)
+  add_indices(:users, :email, :password)
 end
 
 function down()
