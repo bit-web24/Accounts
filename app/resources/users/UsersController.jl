@@ -11,11 +11,11 @@ function auth()
 end
 
 function login()
-  html(:users, :signup)
+  html(:users, :login)
 end
 
 function signup()
-  html(:users, :login)
+  html(:users, :signup)
 end
 
 function authenticator()
