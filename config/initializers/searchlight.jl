@@ -1,5 +1,6 @@
 using SearchLight
 using Genie
+using SearchLightSQLite
 
 function Genie.Renderer.Json.JSON3.StructTypes.StructType(::Type{T}) where {T<:SearchLight.AbstractModel}
   Genie.Renderer.Json.JSON3.StructTypes.Struct()
