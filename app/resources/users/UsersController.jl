@@ -37,10 +37,12 @@ function login_auth()
       redirect(:dashboard)
     else
       @error "Incorrect Credentials"
+      redirect(:log_in)
     end
   catch error
     if isa(error, BoundsError)
       @info "No user found with Email: $(params(:email))"
+      redirect(:sign_up)
     end
   end
 end
