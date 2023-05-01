@@ -6,6 +6,8 @@ using Genie.Router, Genie.Renderer
 using SearchLight
 using SearchLightSQLite
 
+__ID__ = nothing
+
 function auth()
   html(:users, :auth)
 end
@@ -20,11 +22,13 @@ end
 
 function signup_auth()
   try
-    find(User, email=params(:email))[end]; @info "User already exist!"
+    find(User, email=params(:email))[end]
+    @warn "User already exist!"
     redirect(:log_in)
   catch err
     User(email=params(:email), password=params(:password)) |> save
-    @info "Successfully Saved Credentials!"
+    @info "Signup Successfully!"
+    global __ID__ = find(User, email=params(:email))[end].id
     redirect(:dashboard)
   end
 end
@@ -34,6 +38,7 @@ function login_auth()
     user = find(User, email=params(:email))[end]
     if user.password == params(:password)
       @info "Successfully Authenticated!"
+      global __ID__ = user.id
       redirect(:dashboard)
     else
       @error "Incorrect Credentials"
@@ -41,14 +46,15 @@ function login_auth()
     end
   catch error
     if isa(error, BoundsError)
-      @info "No user found with Email: $(params(:email))"
+      @error "No user found with Email: $(params(:email))"
       redirect(:sign_up)
     end
   end
 end
 
 function dashboard()
-  # show users dashboard
+  usr = find(User, id=__ID__)[end]
+  html(:users, :dashboard, user=usr)
 end
 
 module API
