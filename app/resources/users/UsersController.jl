@@ -1,12 +1,15 @@
 module UsersController
 
+export UsersController
+
 using Genie.Renderer.Html
 using Accounts.Users
 using Genie.Router, Genie.Renderer
 using SearchLight
 using SearchLightSQLite
+import SearchLight: DbId
 
-__ID__ = nothing
+__ID__::DbId = 0
 
 function auth()
   html(:users, :auth)
