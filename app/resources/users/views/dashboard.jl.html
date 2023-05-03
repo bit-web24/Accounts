@@ -1,6 +1,20 @@
 <div>
     <h1>Dashboard</h1><br /></br>
     <div>
-            <h2>Hi <span>$(user.username)</span></h2>
+            <h2>Hi <span>$(user.username)</span> <br/> <p>$(user.email)</p> </h2>
+    </div>
+
+    <div>
+        <ul>
+            <% for_each(user.credentials) do cred %>
+                <li>
+                    <div>
+                        <h2>USERNAME: $(cred.username)</h2>
+                        <h2>EMAIL: $(cred.email)</h2>
+                        <h2>PASSWORD: $(cred.password)</h2>
+                    </div>
+                </li>
+            <% end %>
+        </ul>
     </div>
 </div>
