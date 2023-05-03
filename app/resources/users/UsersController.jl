@@ -3,11 +3,17 @@ module UsersController
 export UsersController
 
 using Genie.Renderer.Html
-using Accounts.Users
+using Accounts.Users, Accounts.Creds
 using Genie.Router, Genie.Renderer
 using SearchLight
 using SearchLightSQLite
 import SearchLight: DbId
+
+include("../../../lib/EmailValidator.jl")
+include("../../../lib/UserDetails.jl")
+
+using .EmailValidator
+using .UserDetails
 
 __ID__::DbId = 0
 
@@ -56,8 +62,10 @@ function login_auth()
 end
 
 function dashboard()
-  usr = find(User, id=__ID__)[end]
-  html(:users, :dashboard, user=usr)
+  user = find(User, id=__ID__)[end] #need some attention
+  creds = find(Cred, usr=__ID__)
+  user = Details(extract_username(user.email) , user.email, creds)
+  html(:users, :dashboard, user=user)
 end
 
 module API
