@@ -1,6 +1,6 @@
 module Users
 
-import SearchLight: AbstractModel, DbId, save!
+import SearchLight: AbstractModel, DbId
 import Base: @kwdef
 
 export User

@@ -2,7 +2,7 @@ env: ENV["GENIE_ENV"]
 
 dev:
   adapter: SQLite
-  database: db/users.sqlite
+  database: db/DATABASE.sqlite
   host:
   username:
   password:

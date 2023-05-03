@@ -13,7 +13,9 @@ function up()
     ]
   end
 
-  add_indices(:users, :email, :password)
+  add_index(:users, :email)
+  add_index(:users, :password)
+
 end
 
 function down()
