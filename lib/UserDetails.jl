@@ -2,7 +2,7 @@ module UserDetails
 
 export Details
 
-include("../app/resources/creds/Creds.jl")
+include(joinpath(pwd(), "app/resources/creds/Creds.jl"))
 using .Creds
 
 struct Details
