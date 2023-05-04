@@ -10,7 +10,7 @@ using SearchLightSQLite
 import SearchLight: DbId
 
 include(joinpath(pwd(), "lib/EmailValidator.jl"))
-include(joinpath(pwd(), "lib/UserDetails.jl"))
+include(joinpath(pwd(), "app/resources/users/UserDetails.jl"))
 
 using .EmailValidator
 using .UserDetails
@@ -79,7 +79,7 @@ end
 function dashboard()
   user = find(User, id=__ID__)[end] #need some attention
   creds = find(Cred, usr=__ID__)
-  user = Details(extract_username(user.email), user.email, creds)
+  user = Details(string(extract_username(user.email)), user.email, creds)
   html(:users, :dashboard, user=user)
 end
 
