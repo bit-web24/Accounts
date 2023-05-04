@@ -1,20 +1,96 @@
-<div>
-    <h1>Dashboard</h1><br /></br>
-    <div>
-            <h2>Hi <span>$(user.username)</span> <br/> <p>$(user.email)</p> </h2>
-    </div>
+<head>
+    <style>
+        /* Styling for the popup form */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border: 1px solid black;
+            padding: 20px;
+            z-index: 1;
+        }
+
+        /* Styling for the overlay behind the popup */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+    </style>
+</head>
+
+<body>
 
     <div>
-        <ul>
-            <% for_each(user.credentials) do cred %>
-                <li>
-                    <div>
-                        <h2>USERNAME: $(cred.username)</h2>
-                        <h2>EMAIL: $(cred.email)</h2>
-                        <h2>PASSWORD: $(cred.password)</h2>
-                    </div>
-                </li>
-            <% end %>
-        </ul>
+        <h1>Dashboard</h1><br /></br>
+        <div>
+            <h2>Hi <span>$(user.username)</span> <br />
+                <p>$(user.email)</p>
+            </h2>
+        </div>
+
+        <!--ADD-BUTTON-&-SEARCH-BAR-->
+        <button onclick="openPopup()">Add Account</button> <br/><br/>
+
+        <!-- The popup form and overlay -->
+        <div class="overlay"></div>
+        <div class="popup">
+            <h2>New Account</h2>
+            <form action="/add_account" method="post">
+                <label for="username">username:</label>
+                <input type="text" id="username" name="username"><br><br>
+                
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email"><br><br>
+                
+                <label for="password">Password: </label>
+                <input type="password" name="password" id="password"><br><br> 
+                
+                <input type="submit" value="Submit">
+            </form> <br>
+            <button onclick="closePopup()">Close</button>
+        </div>
+
+            <input type="search" name="SearchBar" id="SearchBar" placeholder="Search">
+            <input type="button" value="Search">
+
+        <div>
+            <ul>
+                <% for_each(user.credentials) do cred %>
+                    <li>
+                        <div>
+                            <h2>USERNAME: $(cred.username)</h2>
+                            <h2>EMAIL: $(cred.email)</h2>
+                            <h2>PASSWORD: $(cred.password)</h2>
+                        </div>
+                    </li>
+                    <% end %>
+            </ul>
+        </div>
     </div>
-</div>
+
+   
+
+
+    <script>
+        function openPopup() {
+            document.querySelector('.overlay').style.display = 'block';
+            document.querySelector('.popup').style.display = 'block';
+        }
+
+        function closePopup() {
+            document.querySelector('.overlay').style.display = 'none';
+            document.querySelector('.popup').style.display = 'none';
+        }
+
+    </script>
+
+</body>

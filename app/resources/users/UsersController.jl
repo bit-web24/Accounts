@@ -9,8 +9,8 @@ using SearchLight
 using SearchLightSQLite
 import SearchLight: DbId
 
-include("../../../lib/EmailValidator.jl")
-include("../../../lib/UserDetails.jl")
+include(joinpath(pwd(), "lib/EmailValidator.jl"))
+include(joinpath(pwd(), "app/resources/users/UserDetails.jl"))
 
 using .EmailValidator
 using .UserDetails
@@ -39,6 +39,11 @@ function signup_auth()
       User(email=params(:email), password=params(:password)) |> save
       @info "Signup Successfully!"
       global __ID__ = find(User, email=params(:email))[end].id
+      #store the session id to file
+      sessionf = open(joinpath(pwd(),"SESSIONID.txt"), "w")
+      write(sessionf, string(__ID__))
+      close(sessionf)
+      #redirect to dashboard page of the current user
       redirect(:dashboard)
     else
       @warn "Invalid Credentials"
@@ -53,6 +58,11 @@ function login_auth()
     if user.password == params(:password)
       @info "Successfully Authenticated!"
       global __ID__ = user.id
+      #store the session id to file
+      sessionf = open(joinpath(pwd(),"SESSIONID.txt"), "w")
+      write(sessionf, string(__ID__))
+      close(sessionf)
+      #redirect to dashboard page of the current user
       redirect(:dashboard)
     else
       @error "Incorrect Credentials"
@@ -69,7 +79,7 @@ end
 function dashboard()
   user = find(User, id=__ID__)[end] #need some attention
   creds = find(Cred, usr=__ID__)
-  user = Details(extract_username(user.email), user.email, creds)
+  user = Details(string(extract_username(user.email)), user.email, creds)
   html(:users, :dashboard, user=user)
 end
 
