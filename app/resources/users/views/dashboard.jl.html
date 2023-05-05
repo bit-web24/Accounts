@@ -31,7 +31,7 @@
 
     <div>
         <h1>Dashboard</h1><br /></br>
-        <a href="/logout">LogOut</a>
+        <a href="$(Genie.Router.linkto(:logout))">LogOut</a>
         <div>
             <h2>Hi <span>$(user.username)</span> <br />
                 <p>$(user.email)</p>
@@ -45,7 +45,7 @@
         <div class="overlay"></div>
         <div class="popup">
             <h2>New Account</h2>
-            <form action="/add_account" method="post">
+            <form action="$(Genie.Router.linkto(:add_account))" method="post">
                 <label for="username">username:</label>
                 <input type="text" id="username" name="username"><br><br>
                 

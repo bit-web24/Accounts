@@ -18,4 +18,4 @@ route("/api/users", UsersController.API.users, named= :api_users)
 
 route("/add_account", CredsController.add_account, named=:add_account, method=POST)
 
-route("/logout", UsersController.logout)
+route("/logout", UsersController.logout, named= :logout)

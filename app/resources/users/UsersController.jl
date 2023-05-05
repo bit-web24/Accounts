@@ -35,7 +35,7 @@ function signup_auth()
     @warn "User already exist!"
     redirect(:log_in)
   catch err
-    if is_valid_email(params(:email))
+    if is_valid_email(params(:email)) && (params(:password) != "" || length(params(:password)) < 8)
       User(email=params(:email), password=params(:password)) |> save
       @info "Signup Successfully!"
       global __ID__ = find(User, email=params(:email))[end].id
@@ -98,7 +98,7 @@ end
     
     global __ID__ = 0
 
-    html(:users, :auth)
+    redirect(:auth)
   end
 
 
