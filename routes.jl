@@ -1,4 +1,4 @@
-using Genie.Router
+using Genie.Router, Genie.Renderer
 using Accounts.UsersController
 using Accounts.CredsController
 
@@ -17,3 +17,5 @@ route("/dashboard", UsersController.dashboard, named= :dashboard)
 route("/api/users", UsersController.API.users, named= :api_users)
 
 route("/add_account", CredsController.add_account, named=:add_account, method=POST)
+
+route("/logout", UsersController.logout)
