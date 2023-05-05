@@ -46,7 +46,16 @@
         <div class="popup">
             <h2>New Account</h2>
             <form action="$(Genie.Router.linkto(:add_account))" method="post">
-                <label for="username">username:</label>
+                <label for="website">Website:</label>
+                <input type="text" id="website" name="website"><br><br>
+
+                <label for="firstname">firstname:</label>
+                <input type="text" id="firstname" name="firstname"><br><br>
+
+                <label for="lastname">lastname:</label>
+                <input type="text" id="lastname" name="lastname"><br><br>
+
+                <label for="username">Username:</label>
                 <input type="text" id="username" name="username"><br><br>
                 
                 <label for="email">Email:</label>
@@ -55,22 +64,33 @@
                 <label for="password">Password: </label>
                 <input type="password" name="password" id="password"><br><br> 
                 
+                <label for="dob">DOB:</label>
+                <input type="text" id="dob" name="dob"><br><br>
+
+                <label for="location">Location:</label>
+                <input type="text" id="location" name="location"><br><br>
+
                 <input type="submit" value="Submit">
             </form> <br>
             <button onclick="closePopup()">Close</button>
         </div>
 
-            <input type="search" name="SearchBar" id="SearchBar" placeholder="Search">
+            <input type="search" name="SearchBar" id="SearchBar" placeholder="e.g. example.com">
             <input type="button" value="Search">
 
         <div>
             <ul>
                 <% for_each(user.credentials) do cred %>
                     <li>
+                        <h2>WEBSITE: $(cred.website)</h2>
                         <div>
-                            <h2>USERNAME: $(cred.username)</h2>
-                            <h2>EMAIL: $(cred.email)</h2>
-                            <h2>PASSWORD: $(cred.password)</h2>
+                            <h3>Firstname: $(cred.firstname)</h3>
+                            <h3>Lastname: $(cred.lastname)</h3>
+                            <h3>Username: $(cred.username)</h3>
+                            <h3>Email: $(cred.email)</h3>
+                            <h3>Password: $(cred.password)</h3>
+                            <h3>Date-Of-Birth: $(cred.dob)</h3>
+                            <h3>Location: $(cred.location)</h3>
                         </div>
                     </li>
                     <% end %>

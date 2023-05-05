@@ -11,6 +11,11 @@ function up()
         :username => :string
         :password => :string
         :email    => :string
+        :firstname=> :string
+        :lastname => :string
+        :website  => :string
+        :location => :string
+        :dob      => :string
       ])
     ]
   end
@@ -19,6 +24,11 @@ function up()
   add_index(:creds, :username)
   add_index(:creds, :password)
   add_index(:creds, :email)
+  add_index(:creds, :firstname)
+  add_index(:creds, :lastname)
+  add_index(:creds, :website)
+  add_index(:creds, :location)
+  add_index(:creds, :dob)
 
 end
 

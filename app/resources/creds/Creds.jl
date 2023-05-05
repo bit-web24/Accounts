@@ -11,6 +11,11 @@ export Cred
   username::String = ""
   password::String = ""
   email::String = ""
+  firstname::String = ""
+  lastname::String = ""
+  website::String = ""
+  location::String = ""
+  dob::String = ""
 end
 
 end
