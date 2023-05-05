@@ -101,17 +101,4 @@ end
     redirect(:auth)
   end
 
-
-module API
-using ..UsersController
-using Genie.Renderer.Json
-using SearchLight
-using Accounts.Users
-
-function users()
-  json(:users, :users_data, users=all(User))
-end
-
-end
-
 end
