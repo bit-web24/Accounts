@@ -35,12 +35,12 @@ function signup_auth()
     @warn "User already exist!"
     redirect(:log_in)
   catch err
-    if is_valid_email(params(:email))
+    if is_valid_email(params(:email)) && (params(:password) != "" || length(params(:password)) < 8)
       User(email=params(:email), password=params(:password)) |> save
       @info "Signup Successfully!"
       global __ID__ = find(User, email=params(:email))[end].id
       #store the session id to file
-      sessionf = open(joinpath(pwd(),"SESSIONID.txt"), "w")
+      sessionf = open(joinpath(pwd(), "SESSIONID.txt"), "w")
       write(sessionf, string(__ID__))
       close(sessionf)
       #redirect to dashboard page of the current user
@@ -59,7 +59,7 @@ function login_auth()
       @info "Successfully Authenticated!"
       global __ID__ = user.id
       #store the session id to file
-      sessionf = open(joinpath(pwd(),"SESSIONID.txt"), "w")
+      sessionf = open(joinpath(pwd(), "SESSIONID.txt"), "w")
       write(sessionf, string(__ID__))
       close(sessionf)
       #redirect to dashboard page of the current user
@@ -77,22 +77,24 @@ function login_auth()
 end
 
 function dashboard()
-  user = find(User, id=__ID__)[end] #need some attention
-  creds = find(Cred, usr=__ID__)
-  user = Details(string(extract_username(user.email)), user.email, creds)
-  html(:users, :dashboard, user=user)
+  try
+    user = find(User, id=__ID__)[end]
+    creds = find(Cred, usr=__ID__)
+    user = Details(string(extract_username(user.email)), user.email, creds)
+    html(:users, :dashboard, user=user)
+  catch err
+    @warn "Not Loged in: __ID__=$__ID__"
+    redirect(:auth)
+  end
 end
 
-module API
-using ..UsersController
-using Genie.Renderer.Json
-using SearchLight
-using Accounts.Users
-
-function users()
-  json(:users, :users_data, users=all(User))
-end
-
+function logout()
+  global __ID__ = 0
+  #store the session id to file
+  sessionf = open(joinpath(pwd(), "SESSIONID.txt"), "w")
+  write(sessionf, string(__ID__))
+  close(sessionf)
+  redirect(:auth)
 end
 
 end

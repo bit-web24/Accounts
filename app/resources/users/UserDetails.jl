@@ -2,8 +2,6 @@ module UserDetails
 
 export Details
 
-# include(joinpath(pwd(), "app/resources/creds/Creds.jl"))
-# using .Creds
 using Accounts.Creds
 
 struct Details
