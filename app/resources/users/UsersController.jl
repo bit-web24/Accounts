@@ -77,28 +77,24 @@ function login_auth()
 end
 
 function dashboard()
-  sessionf = open(joinpath(pwd(), "SESSIONID.txt"))
-  sessionid = parse(Int, read(sessionf, String))
-  close(sessionf)
-
-  if sessionid == 0
-    redirect(:auth)
-  else
-    user = find(User, id=__ID__)[end] #need some attention
+  try
+    user = find(User, id=__ID__)[end]
     creds = find(Cred, usr=__ID__)
     user = Details(string(extract_username(user.email)), user.email, creds)
     html(:users, :dashboard, user=user)
+  catch err
+    @warn "Not Loged in: __ID__=$__ID__"
+    redirect(:auth)
   end
 end
 
-  function logout()
-    sessionf = open(joinpath(pwd(), "SESSIONID.txt"), "w")
-    write(sessionf, "0")
-    close(sessionf)
-    
-    global __ID__ = 0
-
-    redirect(:auth)
-  end
+function logout()
+  global __ID__ = 0
+  #store the session id to file
+  sessionf = open(joinpath(pwd(), "SESSIONID.txt"), "w")
+  write(sessionf, string(__ID__))
+  close(sessionf)
+  redirect(:auth)
+end
 
 end
