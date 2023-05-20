@@ -1,16 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Accounts - Get Started</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Accounts::Welcome</title>
-</head>
+      body {
+        background-color: #f7f7f7;
+        font-family: Arial, sans-serif;
+      }
 
-<body>
-  <h1>Welcome to Accounts</h1>
-  <button><a href="/auth">Get Started</a></button>
-</body>
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+      }
 
+      .logo {
+        font-size: 48px;
+        font-weight: bold;
+        color: #007bff;
+        margin-bottom: 20px;
+      }
+
+      .title {
+        font-size: 32px;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+
+      .description {
+        font-size: 18px;
+        margin-bottom: 30px;
+      }
+
+      .cta-button {
+        display: inline-block;
+        font-size: 24px;
+        font-weight: bold;
+        color: #fff;
+        background-color: #007bff;
+        border-radius: 30px;
+        padding: 15px 30px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .cta-button:hover {
+        background-color: #0062cc;
+        transform: scale(1.05);
+      }
+
+      .cta-button i {
+        margin-right: 10px;
+      }
+
+      .image {
+        margin-top: 50px;
+        text-align: center;
+      }
+
+      .image img {
+        width: 100%;
+        max-width: 500px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="logo">Accounts</div>
+      <div class="title">Never Forget a Password Again</div>
+      <div class="description">Securely store and manage all your accounts and passwords in one place. Access them from anywhere, on any device.</div>
+      <a href="/auth" class="cta-button"><i class="fas fa-key"></i>Get Started</a>    </div>
+  </body>
 </html>
